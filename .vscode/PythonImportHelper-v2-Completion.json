@@ -114,6 +114,22 @@
         "documentation": {}
     },
     {
+        "label": "champions",
+        "importPath": "routers.champions",
+        "description": "routers.champions",
+        "isExtraImport": true,
+        "detail": "routers.champions",
+        "documentation": {}
+    },
+    {
+        "label": "skins",
+        "importPath": "routers.skins",
+        "description": "routers.skins",
+        "isExtraImport": true,
+        "detail": "routers.skins",
+        "documentation": {}
+    },
+    {
         "label": "app",
         "kind": 5,
         "importPath": "config.database",
@@ -208,7 +224,25 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app = FastAPI()\n# app.title = 'FastAPI Skins List'\n# app.version = '0.0.1'\n# app.include_router(champion_router)\n# app.include_router(skin_router)\n# Base.metadata.create_all(bind=engine)\n@app.get('/')\ndef message():\n    return \"Hello world!\"",
+        "peekOfCode": "app = FastAPI()\napp.title = 'FastAPI Skins List'\napp.version = '0.0.1'\napp.include_router(champions)\napp.include_router(skins)\n@app.get('/')\ndef message():\n    return \"Hello world!\"",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "app.title",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "app.title = 'FastAPI Skins List'\napp.version = '0.0.1'\napp.include_router(champions)\napp.include_router(skins)\n@app.get('/')\ndef message():\n    return \"Hello world!\"",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "app.version",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "app.version = '0.0.1'\napp.include_router(champions)\napp.include_router(skins)\n@app.get('/')\ndef message():\n    return \"Hello world!\"",
         "detail": "main",
         "documentation": {}
     }
