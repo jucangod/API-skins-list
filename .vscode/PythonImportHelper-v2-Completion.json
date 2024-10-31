@@ -26,11 +26,75 @@
         "documentation": {}
     },
     {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
         "label": "FastAPI",
         "importPath": "fastapi",
         "description": "fastapi",
         "isExtraImport": true,
         "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "ChampionService",
+        "importPath": "services.champions",
+        "description": "services.champions",
+        "isExtraImport": true,
+        "detail": "services.champions",
+        "documentation": {}
+    },
+    {
+        "label": "JSONResponse",
+        "importPath": "fastapi.responses",
+        "description": "fastapi.responses",
+        "isExtraImport": true,
+        "detail": "fastapi.responses",
+        "documentation": {}
+    },
+    {
+        "label": "JSONResponse",
+        "importPath": "fastapi.responses",
+        "description": "fastapi.responses",
+        "isExtraImport": true,
+        "detail": "fastapi.responses",
+        "documentation": {}
+    },
+    {
+        "label": "jsonable_encoder",
+        "importPath": "fastapi.encoders",
+        "description": "fastapi.encoders",
+        "isExtraImport": true,
+        "detail": "fastapi.encoders",
+        "documentation": {}
+    },
+    {
+        "label": "jsonable_encoder",
+        "importPath": "fastapi.encoders",
+        "description": "fastapi.encoders",
+        "isExtraImport": true,
+        "detail": "fastapi.encoders",
+        "documentation": {}
+    },
+    {
+        "label": "SkinsService",
+        "importPath": "services.skins",
+        "description": "services.skins",
+        "isExtraImport": true,
+        "detail": "services.skins",
         "documentation": {}
     },
     {
@@ -76,6 +140,24 @@
         "description": "config.database",
         "peekOfCode": "skins_collection = db.get_collection(\"skins\")\n# Send a ping to confirm a successful connection \ntry:     \n    client.admin.command('ping')     \n    print(\"Pinged your deployment. You have successfully connected to MongoDB!\") \nexcept Exception as e:     \n    print(e)",
         "detail": "config.database",
+        "documentation": {}
+    },
+    {
+        "label": "champions",
+        "kind": 5,
+        "importPath": "routers.champions",
+        "description": "routers.champions",
+        "peekOfCode": "champions = APIRouter()\n# Obtener todos los campeones\n@champions.get('/champions', tags=['champion'])\nasync def get_champions():\n    service = ChampionService()\n    champions = await service.get_champions()\n    return JSONResponse(content=jsonable_encoder(champions))",
+        "detail": "routers.champions",
+        "documentation": {}
+    },
+    {
+        "label": "skins",
+        "kind": 5,
+        "importPath": "routers.skins",
+        "description": "routers.skins",
+        "peekOfCode": "skins = APIRouter()\n#Obtener todas las skins\n@skins.get('/skins', tags=['skins'])\nasync def get_skins():\n    service = SkinsService()\n    skins = await service.get_skins()\n    return JSONResponse(content=jsonable_encoder(skins))\n#Obtener skins obtenidas\n@skins.get('/skins/owned', tags=['skins'])\nasync def get_owned_skins():",
+        "detail": "routers.skins",
         "documentation": {}
     },
     {
