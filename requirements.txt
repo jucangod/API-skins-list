@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+motor
+pydantic
+python-dotenv
+httpx
+pytest
+pytest-asyncio
+pymongo
+coverage

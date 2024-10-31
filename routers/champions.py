@@ -1,12 +1,13 @@
-from fastapi import APIRouter, HTTPException
-from app.services.champion_service import ChampionService
-from app.database import mongodb
-from bson import ObjectId
+from fastapi import APIRouter
+from services.champions import ChampionService
+from fastapi.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
 
-champion_router = APIRouter()
-champion_service = ChampionService(mongodb.db)
+champions = APIRouter()
 
-@champion_router.get('/champions', tags=['champions'])
+# Obtener todos los campeones
+@champions.get('/champions', tags=['champion'])
 async def get_champions():
-    champions = await champion_service.get_champions()
-    return champions
+    service = ChampionService()
+    champions = await service.get_champions()
+    return JSONResponse(content=jsonable_encoder(champions))

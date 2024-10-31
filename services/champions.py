@@ -1,9 +1,10 @@
-from fastapi import APIRouter
+from config.database import champions_collection as colection
+
+print(colection)
 
 class ChampionService():
-    
-    def __init__(self, db) -> None:
-        self.db = db
-    
-    def get_champions(self):
-        result = self.db.query(ChampionModel).all()
+    async def get_champions(self):
+        champions_docs = colection.find()
+        champions = await champions_docs.to_list()
+        print("Campeones recibidos ", champions)
+        return champions

@@ -1,16 +1,21 @@
 import os
-from motor.motor_asyncio import AsyncIOMotorClient
-from dotenv import load_dotenv
+import motor.motor_asyncio
+from fastapi import FastAPI
 
-# Carga la URL de conexión desde un archivo .env para seguridad
-load_dotenv()
-MONGODB_URI = os.getenv("MONGODB_URI")
+app = FastAPI()
 
-# Configuración de la conexión a MongoDB
-class MongoDB:
-    def __init__(self, uri: str):
-        self.client = AsyncIOMotorClient(uri)
-        self.db = self.client["skins-list"]
+MONGODB_URL="mongodb+srv://jcespinozarodriguez:3sP0RtduIj7JM03G@skins-wish-list.dteyc.mongodb.net/?retryWrites=true&w=majority&appName=skins-wish-list"
 
-# Instancia global de MongoDB para usar en toda la aplicación
-mongodb = MongoDB(MONGODB_URI)
+# Create a new client and connect to the server 
+client = motor.motor_asyncio.AsyncIOMotorClient(MONGODB_URL)
+
+db = client.get_database("skins_list")
+champions_collection = db.get_collection("champions")
+skins_collection = db.get_collection("skins")
+
+# Send a ping to confirm a successful connection 
+try:     
+    client.admin.command('ping')     
+    print("Pinged your deployment. You have successfully connected to MongoDB!") 
+except Exception as e:     
+    print(e) 
