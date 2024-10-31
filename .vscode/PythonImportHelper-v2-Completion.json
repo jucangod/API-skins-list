@@ -98,6 +98,22 @@
         "documentation": {}
     },
     {
+        "label": "champions_collection",
+        "importPath": "config.database",
+        "description": "config.database",
+        "isExtraImport": true,
+        "detail": "config.database",
+        "documentation": {}
+    },
+    {
+        "label": "skins_collection",
+        "importPath": "config.database",
+        "description": "config.database",
+        "isExtraImport": true,
+        "detail": "config.database",
+        "documentation": {}
+    },
+    {
         "label": "app",
         "kind": 5,
         "importPath": "config.database",
@@ -158,6 +174,24 @@
         "description": "routers.skins",
         "peekOfCode": "skins = APIRouter()\n#Obtener todas las skins\n@skins.get('/skins', tags=['skins'])\nasync def get_skins():\n    service = SkinsService()\n    skins = await service.get_skins()\n    return JSONResponse(content=jsonable_encoder(skins))\n#Obtener skins obtenidas\n@skins.get('/skins/owned', tags=['skins'])\nasync def get_owned_skins():",
         "detail": "routers.skins",
+        "documentation": {}
+    },
+    {
+        "label": "ChampionService",
+        "kind": 6,
+        "importPath": "services.champions",
+        "description": "services.champions",
+        "peekOfCode": "class ChampionService():\n    async def get_champions(self):\n        champions_docs = colection.find()\n        champions = await champions_docs.to_list()\n        return champions",
+        "detail": "services.champions",
+        "documentation": {}
+    },
+    {
+        "label": "SkinsService",
+        "kind": 6,
+        "importPath": "services.skins",
+        "description": "services.skins",
+        "peekOfCode": "class SkinsService():\n    async def get_skins(self):\n        skins_docs = skins_collection.find()\n        skins = await skins_docs.to_list()\n        return skins\n    async def get_missing_skins(self):\n        skins_docs = skins_collection.find({\n            \"$and\": [\n                {\"isOwned\": False},\n                {\"isWished\": False}",
+        "detail": "services.skins",
         "documentation": {}
     },
     {
