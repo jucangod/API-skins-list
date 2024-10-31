@@ -32,6 +32,22 @@
         "documentation": {}
     },
     {
+        "label": "JSONResponse",
+        "importPath": "fastapi.responses",
+        "description": "fastapi.responses",
+        "isExtraImport": true,
+        "detail": "fastapi.responses",
+        "documentation": {}
+    },
+    {
+        "label": "jsonable_encoder",
+        "importPath": "fastapi.encoders",
+        "description": "fastapi.encoders",
+        "isExtraImport": true,
+        "detail": "fastapi.encoders",
+        "documentation": {}
+    },
+    {
         "label": "champions_collection",
         "importPath": "config.config",
         "description": "config.config",
@@ -93,21 +109,30 @@
         "documentation": {}
     },
     {
-        "label": "get_champions",
-        "kind": 2,
-        "importPath": "routers.champions",
-        "description": "routers.champions",
-        "peekOfCode": "def get_champions():\n    champions = champions_collection.find()\n    return champions",
-        "detail": "routers.champions",
-        "documentation": {}
-    },
-    {
         "label": "champions_router",
         "kind": 5,
         "importPath": "routers.champions",
         "description": "routers.champions",
-        "peekOfCode": "champions_router = APIRouter()\n@champions_router.get('/champions')\ndef get_champions():\n    champions = champions_collection.find()\n    return champions",
+        "peekOfCode": "champions_router = APIRouter()\n@champions_router.get('/champions')\nasync def get_champions():\n    champions = champions_collection.find()\n    return champions",
         "detail": "routers.champions",
+        "documentation": {}
+    },
+    {
+        "label": "convertChampion",
+        "kind": 2,
+        "importPath": "serializer.champions",
+        "description": "serializer.champions",
+        "peekOfCode": "def convertChampion(champ) -> dict:\n    return {\n        \"id\": str(champ[\"_id\"]),\n        \"name\": champ[\"name\"],\n        \"skins\": champ[\"skins[]\"]\n    }\ndef convertChampions(champs) -> list:\n    return [convertChampion(champ) for champ in champs]",
+        "detail": "serializer.champions",
+        "documentation": {}
+    },
+    {
+        "label": "convertChampions",
+        "kind": 2,
+        "importPath": "serializer.champions",
+        "description": "serializer.champions",
+        "peekOfCode": "def convertChampions(champs) -> list:\n    return [convertChampion(champ) for champ in champs]",
+        "detail": "serializer.champions",
         "documentation": {}
     },
     {
