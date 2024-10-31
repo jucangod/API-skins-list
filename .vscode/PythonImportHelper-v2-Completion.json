@@ -24,11 +24,27 @@
         "documentation": {}
     },
     {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
         "label": "FastAPI",
         "importPath": "fastapi",
         "description": "fastapi",
         "isExtraImport": true,
         "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "JSONResponse",
+        "importPath": "fastapi.responses",
+        "description": "fastapi.responses",
+        "isExtraImport": true,
+        "detail": "fastapi.responses",
         "documentation": {}
     },
     {
@@ -48,6 +64,14 @@
         "documentation": {}
     },
     {
+        "label": "jsonable_encoder",
+        "importPath": "fastapi.encoders",
+        "description": "fastapi.encoders",
+        "isExtraImport": true,
+        "detail": "fastapi.encoders",
+        "documentation": {}
+    },
+    {
         "label": "champions_collection",
         "importPath": "config.config",
         "description": "config.config",
@@ -56,11 +80,59 @@
         "documentation": {}
     },
     {
-        "label": "champions_router",
+        "label": "skins_collection",
+        "importPath": "config.config",
+        "description": "config.config",
+        "isExtraImport": true,
+        "detail": "config.config",
+        "documentation": {}
+    },
+    {
+        "label": "convertChampion",
+        "importPath": "serializer.champions",
+        "description": "serializer.champions",
+        "isExtraImport": true,
+        "detail": "serializer.champions",
+        "documentation": {}
+    },
+    {
+        "label": "convertChampions",
+        "importPath": "serializer.champions",
+        "description": "serializer.champions",
+        "isExtraImport": true,
+        "detail": "serializer.champions",
+        "documentation": {}
+    },
+    {
+        "label": "convertSkin",
+        "importPath": "serializer.skins",
+        "description": "serializer.skins",
+        "isExtraImport": true,
+        "detail": "serializer.skins",
+        "documentation": {}
+    },
+    {
+        "label": "convertSkins",
+        "importPath": "serializer.skins",
+        "description": "serializer.skins",
+        "isExtraImport": true,
+        "detail": "serializer.skins",
+        "documentation": {}
+    },
+    {
+        "label": "champions",
         "importPath": "routers.champions",
         "description": "routers.champions",
         "isExtraImport": true,
         "detail": "routers.champions",
+        "documentation": {}
+    },
+    {
+        "label": "skins",
+        "importPath": "routers.skins",
+        "description": "routers.skins",
+        "isExtraImport": true,
+        "detail": "routers.skins",
         "documentation": {}
     },
     {
@@ -109,12 +181,39 @@
         "documentation": {}
     },
     {
-        "label": "champions_router",
+        "label": "get_champions",
+        "kind": 2,
+        "importPath": "routers.champions",
+        "description": "routers.champions",
+        "peekOfCode": "def get_champions():\n    champions = champions_collection.find()\n    convertedChampions = convertChampions(champions)\n    return JSONResponse(content=jsonable_encoder(convertedChampions))",
+        "detail": "routers.champions",
+        "documentation": {}
+    },
+    {
+        "label": "champions",
         "kind": 5,
         "importPath": "routers.champions",
         "description": "routers.champions",
-        "peekOfCode": "champions_router = APIRouter()\n@champions_router.get('/champions')\nasync def get_champions():\n    champions = champions_collection.find()\n    return champions",
+        "peekOfCode": "champions = APIRouter()\n@champions.get('/champions')\ndef get_champions():\n    champions = champions_collection.find()\n    convertedChampions = convertChampions(champions)\n    return JSONResponse(content=jsonable_encoder(convertedChampions))",
         "detail": "routers.champions",
+        "documentation": {}
+    },
+    {
+        "label": "get_skins",
+        "kind": 2,
+        "importPath": "routers.skins",
+        "description": "routers.skins",
+        "peekOfCode": "def get_skins():\n    skins = skins_collection.find()\n    convertedSkins = convertSkins(skins)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))",
+        "detail": "routers.skins",
+        "documentation": {}
+    },
+    {
+        "label": "skins",
+        "kind": 5,
+        "importPath": "routers.skins",
+        "description": "routers.skins",
+        "peekOfCode": "skins = APIRouter()\n@skins.get('/skins')\ndef get_skins():\n    skins = skins_collection.find()\n    convertedSkins = convertSkins(skins)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))",
+        "detail": "routers.skins",
         "documentation": {}
     },
     {
@@ -122,7 +221,7 @@
         "kind": 2,
         "importPath": "serializer.champions",
         "description": "serializer.champions",
-        "peekOfCode": "def convertChampion(champ) -> dict:\n    return {\n        \"id\": str(champ[\"_id\"]),\n        \"name\": champ[\"name\"],\n        \"skins\": champ[\"skins[]\"]\n    }\ndef convertChampions(champs) -> list:\n    return [convertChampion(champ) for champ in champs]",
+        "peekOfCode": "def convertChampion(champ) -> dict:\n    return {\n        \"id\": str(champ[\"_id\"]),\n        \"name\": champ[\"name\"],\n        \"skins\": [str(skin_id) for skin_id in champ[\"skins\"]]\n    }\ndef convertChampions(champs) -> list:\n    return [convertChampion(champ) for champ in champs]",
         "detail": "serializer.champions",
         "documentation": {}
     },
@@ -136,11 +235,29 @@
         "documentation": {}
     },
     {
+        "label": "convertSkin",
+        "kind": 2,
+        "importPath": "serializer.skins",
+        "description": "serializer.skins",
+        "peekOfCode": "def convertSkin(skin) -> dict:\n    return {\n        \"id\": str(skin[\"_id\"]),\n        \"skin_name\": skin[\"skin_name\"],\n        \"release_date\": skin[\"release_date\"],\n        \"isOwned\": skin[\"isOwned\"],\n        \"isWished\": skin[\"isWished\"],\n        \"url\": skin[\"url\"]\n    }\ndef convertSkins(skins) -> list:",
+        "detail": "serializer.skins",
+        "documentation": {}
+    },
+    {
+        "label": "convertSkins",
+        "kind": 2,
+        "importPath": "serializer.skins",
+        "description": "serializer.skins",
+        "peekOfCode": "def convertSkins(skins) -> list:\n    return [convertSkin(skin) for skin in skins]",
+        "detail": "serializer.skins",
+        "documentation": {}
+    },
+    {
         "label": "app",
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app = FastAPI()\napp.include_router(champions_router)",
+        "peekOfCode": "app = FastAPI()\napp.include_router(champions)\napp.include_router(skins)",
         "detail": "main",
         "documentation": {}
     }

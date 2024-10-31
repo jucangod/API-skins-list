@@ -1,5 +1,7 @@
 from fastapi import FastAPI
-from routers.champions import champions_router
+from routers.champions import champions
+from routers.skins import skins
 
 app = FastAPI()
-app.include_router(champions_router)
+app.include_router(champions)
+app.include_router(skins)

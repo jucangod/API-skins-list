@@ -2,7 +2,7 @@ def convertChampion(champ) -> dict:
     return {
         "id": str(champ["_id"]),
         "name": champ["name"],
-        "skins": champ["skins[]"]
+        "skins": [str(skin_id) for skin_id in champ["skins"]]
     }
     
 def convertChampions(champs) -> list:
