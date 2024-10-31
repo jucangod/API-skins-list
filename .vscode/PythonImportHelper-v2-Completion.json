@@ -1,24 +1,22 @@
 [
     {
-        "label": "os",
-        "kind": 6,
+        "label": "MongoClient",
+        "importPath": "pymongo.mongo_client",
+        "description": "pymongo.mongo_client",
         "isExtraImport": true,
-        "importPath": "os",
-        "description": "os",
-        "detail": "os",
+        "detail": "pymongo.mongo_client",
         "documentation": {}
     },
     {
-        "label": "motor.motor_asyncio",
-        "kind": 6,
+        "label": "ServerApi",
+        "importPath": "pymongo.server_api",
+        "description": "pymongo.server_api",
         "isExtraImport": true,
-        "importPath": "motor.motor_asyncio",
-        "description": "motor.motor_asyncio",
-        "detail": "motor.motor_asyncio",
+        "detail": "pymongo.server_api",
         "documentation": {}
     },
     {
-        "label": "FastAPI",
+        "label": "APIRouter",
         "importPath": "fastapi",
         "description": "fastapi",
         "isExtraImport": true,
@@ -34,57 +32,82 @@
         "documentation": {}
     },
     {
-        "label": "app",
+        "label": "champions_collection",
+        "importPath": "config.config",
+        "description": "config.config",
+        "isExtraImport": true,
+        "detail": "config.config",
+        "documentation": {}
+    },
+    {
+        "label": "champions_router",
+        "importPath": "routers.champions",
+        "description": "routers.champions",
+        "isExtraImport": true,
+        "detail": "routers.champions",
+        "documentation": {}
+    },
+    {
+        "label": "uri",
         "kind": 5,
-        "importPath": "config.database",
-        "description": "config.database",
-        "peekOfCode": "app = FastAPI()\nMONGODB_URL=\"mongodb+srv://jcespinozarodriguez:3sP0RtduIj7JM03G@skins-wish-list.dteyc.mongodb.net/?retryWrites=true&w=majority&appName=skins-wish-list\"\n# Create a new client and connect to the server \nclient = motor.motor_asyncio.AsyncIOMotorClient(MONGODB_URL)\ndb = client.get_database(\"skins_list\")\nchampions_collection = db.get_collection(\"champions\")\nskins_collection = db.get_collection(\"skins\")\n# Send a ping to confirm a successful connection \ntry:     \n    client.admin.command('ping')     ",
-        "detail": "config.database",
+        "importPath": "config.config",
+        "description": "config.config",
+        "peekOfCode": "uri = \"mongodb+srv://jcespinozarodriguez:3sP0RtduIj7JM03G@skins-wish-list.dteyc.mongodb.net/?retryWrites=true&w=majority&appName=skins-wish-list\"\n# Create a new client and connect to the server\nclient = MongoClient(uri, server_api=ServerApi('1'))\ndb = client.skins_list\nchampions_collection = db['champions']\nskins_collection = db['skins']\n# Send a ping to confirm a successful connection\ntry:\n    client.admin.command('ping')\n    print(\"Pinged your deployment. You successfully connected to MongoDB!\")",
+        "detail": "config.config",
         "documentation": {}
     },
     {
         "label": "client",
         "kind": 5,
-        "importPath": "config.database",
-        "description": "config.database",
-        "peekOfCode": "client = motor.motor_asyncio.AsyncIOMotorClient(MONGODB_URL)\ndb = client.get_database(\"skins_list\")\nchampions_collection = db.get_collection(\"champions\")\nskins_collection = db.get_collection(\"skins\")\n# Send a ping to confirm a successful connection \ntry:     \n    client.admin.command('ping')     \n    print(\"Pinged your deployment. You have successfully connected to MongoDB!\") \nexcept Exception as e:     \n    print(e)",
-        "detail": "config.database",
+        "importPath": "config.config",
+        "description": "config.config",
+        "peekOfCode": "client = MongoClient(uri, server_api=ServerApi('1'))\ndb = client.skins_list\nchampions_collection = db['champions']\nskins_collection = db['skins']\n# Send a ping to confirm a successful connection\ntry:\n    client.admin.command('ping')\n    print(\"Pinged your deployment. You successfully connected to MongoDB!\")\nexcept Exception as e:\n    print(e)",
+        "detail": "config.config",
         "documentation": {}
     },
     {
         "label": "db",
         "kind": 5,
-        "importPath": "config.database",
-        "description": "config.database",
-        "peekOfCode": "db = client.get_database(\"skins_list\")\nchampions_collection = db.get_collection(\"champions\")\nskins_collection = db.get_collection(\"skins\")\n# Send a ping to confirm a successful connection \ntry:     \n    client.admin.command('ping')     \n    print(\"Pinged your deployment. You have successfully connected to MongoDB!\") \nexcept Exception as e:     \n    print(e)",
-        "detail": "config.database",
+        "importPath": "config.config",
+        "description": "config.config",
+        "peekOfCode": "db = client.skins_list\nchampions_collection = db['champions']\nskins_collection = db['skins']\n# Send a ping to confirm a successful connection\ntry:\n    client.admin.command('ping')\n    print(\"Pinged your deployment. You successfully connected to MongoDB!\")\nexcept Exception as e:\n    print(e)",
+        "detail": "config.config",
         "documentation": {}
     },
     {
         "label": "champions_collection",
         "kind": 5,
-        "importPath": "config.database",
-        "description": "config.database",
-        "peekOfCode": "champions_collection = db.get_collection(\"champions\")\nskins_collection = db.get_collection(\"skins\")\n# Send a ping to confirm a successful connection \ntry:     \n    client.admin.command('ping')     \n    print(\"Pinged your deployment. You have successfully connected to MongoDB!\") \nexcept Exception as e:     \n    print(e)",
-        "detail": "config.database",
+        "importPath": "config.config",
+        "description": "config.config",
+        "peekOfCode": "champions_collection = db['champions']\nskins_collection = db['skins']\n# Send a ping to confirm a successful connection\ntry:\n    client.admin.command('ping')\n    print(\"Pinged your deployment. You successfully connected to MongoDB!\")\nexcept Exception as e:\n    print(e)",
+        "detail": "config.config",
         "documentation": {}
     },
     {
         "label": "skins_collection",
         "kind": 5,
-        "importPath": "config.database",
-        "description": "config.database",
-        "peekOfCode": "skins_collection = db.get_collection(\"skins\")\n# Send a ping to confirm a successful connection \ntry:     \n    client.admin.command('ping')     \n    print(\"Pinged your deployment. You have successfully connected to MongoDB!\") \nexcept Exception as e:     \n    print(e)",
-        "detail": "config.database",
+        "importPath": "config.config",
+        "description": "config.config",
+        "peekOfCode": "skins_collection = db['skins']\n# Send a ping to confirm a successful connection\ntry:\n    client.admin.command('ping')\n    print(\"Pinged your deployment. You successfully connected to MongoDB!\")\nexcept Exception as e:\n    print(e)",
+        "detail": "config.config",
         "documentation": {}
     },
     {
-        "label": "message",
+        "label": "get_champions",
         "kind": 2,
-        "importPath": "main",
-        "description": "main",
-        "peekOfCode": "def message():\n    return \"Hello world!\"",
-        "detail": "main",
+        "importPath": "routers.champions",
+        "description": "routers.champions",
+        "peekOfCode": "def get_champions():\n    champions = champions_collection.find()\n    return champions",
+        "detail": "routers.champions",
+        "documentation": {}
+    },
+    {
+        "label": "champions_router",
+        "kind": 5,
+        "importPath": "routers.champions",
+        "description": "routers.champions",
+        "peekOfCode": "champions_router = APIRouter()\n@champions_router.get('/champions')\ndef get_champions():\n    champions = champions_collection.find()\n    return champions",
+        "detail": "routers.champions",
         "documentation": {}
     },
     {
@@ -92,25 +115,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app = FastAPI()\napp.title = 'FastAPI Skins List'\napp.version = '0.0.1'\n# app.include_router(champions)\n# app.include_router(skins)\n@app.get('/')\ndef message():\n    return \"Hello world!\"",
-        "detail": "main",
-        "documentation": {}
-    },
-    {
-        "label": "app.title",
-        "kind": 5,
-        "importPath": "main",
-        "description": "main",
-        "peekOfCode": "app.title = 'FastAPI Skins List'\napp.version = '0.0.1'\n# app.include_router(champions)\n# app.include_router(skins)\n@app.get('/')\ndef message():\n    return \"Hello world!\"",
-        "detail": "main",
-        "documentation": {}
-    },
-    {
-        "label": "app.version",
-        "kind": 5,
-        "importPath": "main",
-        "description": "main",
-        "peekOfCode": "app.version = '0.0.1'\n# app.include_router(champions)\n# app.include_router(skins)\n@app.get('/')\ndef message():\n    return \"Hello world!\"",
+        "peekOfCode": "app = FastAPI()\napp.include_router(champions_router)",
         "detail": "main",
         "documentation": {}
     }

@@ -1,13 +1,8 @@
-# from fastapi import APIRouter
-# from services.champions import ChampionService
-# from fastapi.responses import JSONResponse
-# from fastapi.encoders import jsonable_encoder
+from fastapi import APIRouter
+from config.config import champions_collection
+champions_router = APIRouter()
 
-# champions = APIRouter()
-
-# # Obtener todos los campeones
-# @champions.get('/champions', tags=['champion'])
-# async def get_champions():
-#     service = ChampionService()
-#     champions = await service.get_champions()
-#     return JSONResponse(content=jsonable_encoder(champions))
+@champions_router.get('/champions')
+def get_champions():
+    champions = champions_collection.find()
+    return champions
