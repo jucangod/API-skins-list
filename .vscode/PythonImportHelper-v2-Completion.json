@@ -1,0 +1,28 @@
+[
+    {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "message",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def message():\n    return \"Hello world!\"",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "app = FastAPI()\n# app.title = 'FastAPI Skins List'\n# app.version = '0.0.1'\n# app.include_router(champion_router)\n# app.include_router(skin_router)\n# Base.metadata.create_all(bind=engine)\n@app.get('/')\ndef message():\n    return \"Hello world!\"",
+        "detail": "main",
+        "documentation": {}
+    }
+]

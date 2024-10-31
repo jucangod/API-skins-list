@@ -1,0 +1,38 @@
+# Archivos de Python
+*.py[cod]
+__pycache__/
+*.so
+
+# Entornos virtuales
+venv/
+env/
+.venv/
+
+# Archivos de entorno
+.env
+*.env.*
+
+# Configuración de VSCode y PyCharm
+.vscode/
+.idea/
+
+# Archivos de compilación
+build/
+dist/
+*.egg-info/
+
+# Archivos de pruebas y cobertura
+htmlcov/
+.tox/
+.coverage
+coverage.xml
+*.cover
+.hypothesis/
+
+# Cache de pip y mypy
+.mypy_cache/
+.pytest_cache/
+.pyre/
+
+# Archivos de logs
+*.log
