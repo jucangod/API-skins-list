@@ -26,107 +26,11 @@
         "documentation": {}
     },
     {
-        "label": "APIRouter",
-        "importPath": "fastapi",
-        "description": "fastapi",
-        "isExtraImport": true,
-        "detail": "fastapi",
-        "documentation": {}
-    },
-    {
-        "label": "APIRouter",
-        "importPath": "fastapi",
-        "description": "fastapi",
-        "isExtraImport": true,
-        "detail": "fastapi",
-        "documentation": {}
-    },
-    {
         "label": "FastAPI",
         "importPath": "fastapi",
         "description": "fastapi",
         "isExtraImport": true,
         "detail": "fastapi",
-        "documentation": {}
-    },
-    {
-        "label": "ChampionService",
-        "importPath": "services.champions",
-        "description": "services.champions",
-        "isExtraImport": true,
-        "detail": "services.champions",
-        "documentation": {}
-    },
-    {
-        "label": "JSONResponse",
-        "importPath": "fastapi.responses",
-        "description": "fastapi.responses",
-        "isExtraImport": true,
-        "detail": "fastapi.responses",
-        "documentation": {}
-    },
-    {
-        "label": "JSONResponse",
-        "importPath": "fastapi.responses",
-        "description": "fastapi.responses",
-        "isExtraImport": true,
-        "detail": "fastapi.responses",
-        "documentation": {}
-    },
-    {
-        "label": "jsonable_encoder",
-        "importPath": "fastapi.encoders",
-        "description": "fastapi.encoders",
-        "isExtraImport": true,
-        "detail": "fastapi.encoders",
-        "documentation": {}
-    },
-    {
-        "label": "jsonable_encoder",
-        "importPath": "fastapi.encoders",
-        "description": "fastapi.encoders",
-        "isExtraImport": true,
-        "detail": "fastapi.encoders",
-        "documentation": {}
-    },
-    {
-        "label": "SkinsService",
-        "importPath": "services.skins",
-        "description": "services.skins",
-        "isExtraImport": true,
-        "detail": "services.skins",
-        "documentation": {}
-    },
-    {
-        "label": "champions_collection",
-        "importPath": "config.database",
-        "description": "config.database",
-        "isExtraImport": true,
-        "detail": "config.database",
-        "documentation": {}
-    },
-    {
-        "label": "skins_collection",
-        "importPath": "config.database",
-        "description": "config.database",
-        "isExtraImport": true,
-        "detail": "config.database",
-        "documentation": {}
-    },
-    {
-        "label": "champions",
-        "importPath": "routers.champions",
-        "description": "routers.champions",
-        "isExtraImport": true,
-        "detail": "routers.champions",
-        "documentation": {}
-    },
-    {
-        "label": "skins",
-        "importPath": "routers.skins",
-        "description": "routers.skins",
-        "isExtraImport": true,
-        "detail": "routers.skins",
         "documentation": {}
     },
     {
@@ -175,42 +79,6 @@
         "documentation": {}
     },
     {
-        "label": "champions",
-        "kind": 5,
-        "importPath": "routers.champions",
-        "description": "routers.champions",
-        "peekOfCode": "champions = APIRouter()\n# Obtener todos los campeones\n@champions.get('/champions', tags=['champion'])\nasync def get_champions():\n    service = ChampionService()\n    champions = await service.get_champions()\n    return JSONResponse(content=jsonable_encoder(champions))",
-        "detail": "routers.champions",
-        "documentation": {}
-    },
-    {
-        "label": "skins",
-        "kind": 5,
-        "importPath": "routers.skins",
-        "description": "routers.skins",
-        "peekOfCode": "skins = APIRouter()\n#Obtener todas las skins\n@skins.get('/skins', tags=['skins'])\nasync def get_skins():\n    service = SkinsService()\n    skins = await service.get_skins()\n    return JSONResponse(content=jsonable_encoder(skins))\n#Obtener skins obtenidas\n@skins.get('/skins/owned', tags=['skins'])\nasync def get_owned_skins():",
-        "detail": "routers.skins",
-        "documentation": {}
-    },
-    {
-        "label": "ChampionService",
-        "kind": 6,
-        "importPath": "services.champions",
-        "description": "services.champions",
-        "peekOfCode": "class ChampionService():\n    async def get_champions(self):\n        champions_docs = colection.find()\n        champions = await champions_docs.to_list()\n        return champions",
-        "detail": "services.champions",
-        "documentation": {}
-    },
-    {
-        "label": "SkinsService",
-        "kind": 6,
-        "importPath": "services.skins",
-        "description": "services.skins",
-        "peekOfCode": "class SkinsService():\n    async def get_skins(self):\n        skins_docs = skins_collection.find()\n        skins = await skins_docs.to_list()\n        return skins\n    async def get_missing_skins(self):\n        skins_docs = skins_collection.find({\n            \"$and\": [\n                {\"isOwned\": False},\n                {\"isWished\": False}",
-        "detail": "services.skins",
-        "documentation": {}
-    },
-    {
         "label": "message",
         "kind": 2,
         "importPath": "main",
@@ -224,7 +92,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app = FastAPI()\napp.title = 'FastAPI Skins List'\napp.version = '0.0.1'\napp.include_router(champions)\napp.include_router(skins)\n@app.get('/')\ndef message():\n    return \"Hello world!\"",
+        "peekOfCode": "app = FastAPI()\napp.title = 'FastAPI Skins List'\napp.version = '0.0.1'\n# app.include_router(champions)\n# app.include_router(skins)\n@app.get('/')\ndef message():\n    return \"Hello world!\"",
         "detail": "main",
         "documentation": {}
     },
@@ -233,7 +101,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app.title = 'FastAPI Skins List'\napp.version = '0.0.1'\napp.include_router(champions)\napp.include_router(skins)\n@app.get('/')\ndef message():\n    return \"Hello world!\"",
+        "peekOfCode": "app.title = 'FastAPI Skins List'\napp.version = '0.0.1'\n# app.include_router(champions)\n# app.include_router(skins)\n@app.get('/')\ndef message():\n    return \"Hello world!\"",
         "detail": "main",
         "documentation": {}
     },
@@ -242,7 +110,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app.version = '0.0.1'\napp.include_router(champions)\napp.include_router(skins)\n@app.get('/')\ndef message():\n    return \"Hello world!\"",
+        "peekOfCode": "app.version = '0.0.1'\n# app.include_router(champions)\n# app.include_router(skins)\n@app.get('/')\ndef message():\n    return \"Hello world!\"",
         "detail": "main",
         "documentation": {}
     }
