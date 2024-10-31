@@ -1,10 +1,81 @@
 [
     {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "motor.motor_asyncio",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "motor.motor_asyncio",
+        "description": "motor.motor_asyncio",
+        "detail": "motor.motor_asyncio",
+        "documentation": {}
+    },
+    {
         "label": "FastAPI",
         "importPath": "fastapi",
         "description": "fastapi",
         "isExtraImport": true,
         "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "config.database",
+        "description": "config.database",
+        "peekOfCode": "app = FastAPI()\nMONGODB_URL=\"mongodb+srv://jcespinozarodriguez:3sP0RtduIj7JM03G@skins-wish-list.dteyc.mongodb.net/?retryWrites=true&w=majority&appName=skins-wish-list\"\n# Create a new client and connect to the server \nclient = motor.motor_asyncio.AsyncIOMotorClient(MONGODB_URL)\ndb = client.get_database(\"skins_list\")\nchampions_collection = db.get_collection(\"champions\")\nskins_collection = db.get_collection(\"skins\")\n# Send a ping to confirm a successful connection \ntry:     \n    client.admin.command('ping')     ",
+        "detail": "config.database",
+        "documentation": {}
+    },
+    {
+        "label": "client",
+        "kind": 5,
+        "importPath": "config.database",
+        "description": "config.database",
+        "peekOfCode": "client = motor.motor_asyncio.AsyncIOMotorClient(MONGODB_URL)\ndb = client.get_database(\"skins_list\")\nchampions_collection = db.get_collection(\"champions\")\nskins_collection = db.get_collection(\"skins\")\n# Send a ping to confirm a successful connection \ntry:     \n    client.admin.command('ping')     \n    print(\"Pinged your deployment. You have successfully connected to MongoDB!\") \nexcept Exception as e:     \n    print(e)",
+        "detail": "config.database",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "kind": 5,
+        "importPath": "config.database",
+        "description": "config.database",
+        "peekOfCode": "db = client.get_database(\"skins_list\")\nchampions_collection = db.get_collection(\"champions\")\nskins_collection = db.get_collection(\"skins\")\n# Send a ping to confirm a successful connection \ntry:     \n    client.admin.command('ping')     \n    print(\"Pinged your deployment. You have successfully connected to MongoDB!\") \nexcept Exception as e:     \n    print(e)",
+        "detail": "config.database",
+        "documentation": {}
+    },
+    {
+        "label": "champions_collection",
+        "kind": 5,
+        "importPath": "config.database",
+        "description": "config.database",
+        "peekOfCode": "champions_collection = db.get_collection(\"champions\")\nskins_collection = db.get_collection(\"skins\")\n# Send a ping to confirm a successful connection \ntry:     \n    client.admin.command('ping')     \n    print(\"Pinged your deployment. You have successfully connected to MongoDB!\") \nexcept Exception as e:     \n    print(e)",
+        "detail": "config.database",
+        "documentation": {}
+    },
+    {
+        "label": "skins_collection",
+        "kind": 5,
+        "importPath": "config.database",
+        "description": "config.database",
+        "peekOfCode": "skins_collection = db.get_collection(\"skins\")\n# Send a ping to confirm a successful connection \ntry:     \n    client.admin.command('ping')     \n    print(\"Pinged your deployment. You have successfully connected to MongoDB!\") \nexcept Exception as e:     \n    print(e)",
+        "detail": "config.database",
         "documentation": {}
     },
     {
