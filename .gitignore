@@ -33,6 +33,7 @@ coverage.xml
 .mypy_cache/
 .pytest_cache/
 .pyre/
+__pycache__/
 
 # Archivos de logs
 *.log
