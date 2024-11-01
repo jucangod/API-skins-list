@@ -235,7 +235,7 @@
         "kind": 2,
         "importPath": "routers.skins",
         "description": "routers.skins",
-        "peekOfCode": "def get_skins():\n    skins = skins_collection.find()\n    convertedSkins = convertSkins(skins)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))\n#Obtener skins faltantes\n@skins.get('/skins/missing')\ndef get_missing_skins():\n    skins = skins_collection.find()\n    convertedSkins = convertSkins(skins)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))",
+        "peekOfCode": "def get_skins():\n    skins = skins_collection.find()\n    convertedSkins = convertSkins(skins)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))\n#Obtener skins faltantes\n@skins.get('/skins/missing')\ndef get_missing_skins():\n    conditions = [\n        {\"isWished\": False},\n        {\"isOwned\": False}",
         "detail": "routers.skins",
         "documentation": {}
     },
@@ -244,25 +244,52 @@
         "kind": 2,
         "importPath": "routers.skins",
         "description": "routers.skins",
-        "peekOfCode": "def get_missing_skins():\n    skins = skins_collection.find()\n    convertedSkins = convertSkins(skins)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))\n#Obtener todas las skins en general\n@skins.get('/skins')\ndef get_skins():\n    skins = skins_collection.find()\n    convertedSkins = convertSkins(skins)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))",
+        "peekOfCode": "def get_missing_skins():\n    conditions = [\n        {\"isWished\": False},\n        {\"isOwned\": False}\n    ]\n    skins = skins_collection.find({\n        \"$and\": conditions\n    })\n    convertedSkins = convertSkins(skins)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))",
         "detail": "routers.skins",
         "documentation": {}
     },
     {
-        "label": "get_skins",
+        "label": "get_wished_skins",
         "kind": 2,
         "importPath": "routers.skins",
         "description": "routers.skins",
-        "peekOfCode": "def get_skins():\n    skins = skins_collection.find()\n    convertedSkins = convertSkins(skins)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))\n#Obtener todas las skins en general\n@skins.get('/skins')\ndef get_skins():\n    skins = skins_collection.find()\n    convertedSkins = convertSkins(skins)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))",
+        "peekOfCode": "def get_wished_skins():\n    conditions = [\n        {\"isWished\": True},\n        {\"isOwned\": False}\n    ]\n    skins = skins_collection.find({\n        \"$and\": conditions\n    })\n    convertedSkins = convertSkins(skins)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))",
         "detail": "routers.skins",
         "documentation": {}
     },
     {
-        "label": "get_skins",
+        "label": "get_owned_skins",
         "kind": 2,
         "importPath": "routers.skins",
         "description": "routers.skins",
-        "peekOfCode": "def get_skins():\n    skins = skins_collection.find()\n    convertedSkins = convertSkins(skins)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))",
+        "peekOfCode": "def get_owned_skins():\n    conditions = [\n        {\"isWished\": False},\n        {\"isOwned\": True}\n    ]\n    skins = skins_collection.find({\n        \"$and\": conditions\n    })\n    convertedSkins = convertSkins(skins)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))",
+        "detail": "routers.skins",
+        "documentation": {}
+    },
+    {
+        "label": "add_wished_skins",
+        "kind": 2,
+        "importPath": "routers.skins",
+        "description": "routers.skins",
+        "peekOfCode": "def add_wished_skins(skin_id: str):\n    query = {\"_id\": ObjectId(skin_id)}\n    update = {\"$set\": {\"isWished\": True}}\n    skins_collection.update_one(query, update)\n    updated_skin = skins_collection.find_one(query)\n    convertedSkins = convertSkins(updated_skin)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))\n#Añadir una skin obtenida\n@skins.put('/skins/owned')\ndef add_owned_skins(skin_id: str):",
+        "detail": "routers.skins",
+        "documentation": {}
+    },
+    {
+        "label": "add_owned_skins",
+        "kind": 2,
+        "importPath": "routers.skins",
+        "description": "routers.skins",
+        "peekOfCode": "def add_owned_skins(skin_id: str):\n    query = {\"_id\": ObjectId(skin_id)}\n    update = {\"$set\": {\"isOwned\": True}}\n    skins_collection.update_one(query, update)\n    updated_skin = skins_collection.find_one(query)\n    convertedSkins = convertSkins(updated_skin)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))\n#Eliminar skin\n@skins.put('/skins')\ndef delete_skins(skin_id: str):",
+        "detail": "routers.skins",
+        "documentation": {}
+    },
+    {
+        "label": "delete_skins",
+        "kind": 2,
+        "importPath": "routers.skins",
+        "description": "routers.skins",
+        "peekOfCode": "def delete_skins(skin_id: str):\n    query = {\"_id\": ObjectId(skin_id)}\n    update = {\n        \"$set\": {\n            \"isOwned\": False,\n            \"isWished\": False\n        }\n    }\n    skins_collection.update_one(query, update)\n    updated_skin = skins_collection.find_one(query)",
         "detail": "routers.skins",
         "documentation": {}
     },
