@@ -88,6 +88,22 @@
         "documentation": {}
     },
     {
+        "label": "skins_collection",
+        "importPath": "config.config",
+        "description": "config.config",
+        "isExtraImport": true,
+        "detail": "config.config",
+        "documentation": {}
+    },
+    {
+        "label": "champions_collection",
+        "importPath": "config.config",
+        "description": "config.config",
+        "isExtraImport": true,
+        "detail": "config.config",
+        "documentation": {}
+    },
+    {
         "label": "convertChampion",
         "importPath": "serializer.champions",
         "description": "serializer.champions",
@@ -117,6 +133,22 @@
         "description": "serializer.skins",
         "isExtraImport": true,
         "detail": "serializer.skins",
+        "documentation": {}
+    },
+    {
+        "label": "ObjectId",
+        "importPath": "bson",
+        "description": "bson",
+        "isExtraImport": true,
+        "detail": "bson",
+        "documentation": {}
+    },
+    {
+        "label": "ObjectId",
+        "importPath": "bson",
+        "description": "bson",
+        "isExtraImport": true,
+        "detail": "bson",
         "documentation": {}
     },
     {
@@ -203,6 +235,33 @@
         "kind": 2,
         "importPath": "routers.skins",
         "description": "routers.skins",
+        "peekOfCode": "def get_skins():\n    skins = skins_collection.find()\n    convertedSkins = convertSkins(skins)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))\n#Obtener skins faltantes\n@skins.get('/skins/missing')\ndef get_missing_skins():\n    skins = skins_collection.find()\n    convertedSkins = convertSkins(skins)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))",
+        "detail": "routers.skins",
+        "documentation": {}
+    },
+    {
+        "label": "get_missing_skins",
+        "kind": 2,
+        "importPath": "routers.skins",
+        "description": "routers.skins",
+        "peekOfCode": "def get_missing_skins():\n    skins = skins_collection.find()\n    convertedSkins = convertSkins(skins)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))\n#Obtener todas las skins en general\n@skins.get('/skins')\ndef get_skins():\n    skins = skins_collection.find()\n    convertedSkins = convertSkins(skins)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))",
+        "detail": "routers.skins",
+        "documentation": {}
+    },
+    {
+        "label": "get_skins",
+        "kind": 2,
+        "importPath": "routers.skins",
+        "description": "routers.skins",
+        "peekOfCode": "def get_skins():\n    skins = skins_collection.find()\n    convertedSkins = convertSkins(skins)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))\n#Obtener todas las skins en general\n@skins.get('/skins')\ndef get_skins():\n    skins = skins_collection.find()\n    convertedSkins = convertSkins(skins)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))",
+        "detail": "routers.skins",
+        "documentation": {}
+    },
+    {
+        "label": "get_skins",
+        "kind": 2,
+        "importPath": "routers.skins",
+        "description": "routers.skins",
         "peekOfCode": "def get_skins():\n    skins = skins_collection.find()\n    convertedSkins = convertSkins(skins)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))",
         "detail": "routers.skins",
         "documentation": {}
@@ -212,7 +271,7 @@
         "kind": 5,
         "importPath": "routers.skins",
         "description": "routers.skins",
-        "peekOfCode": "skins = APIRouter()\n@skins.get('/skins')\ndef get_skins():\n    skins = skins_collection.find()\n    convertedSkins = convertSkins(skins)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))",
+        "peekOfCode": "skins = APIRouter()\n#Obtener todas las skins en general\n@skins.get('/skins')\ndef get_skins():\n    skins = skins_collection.find()\n    convertedSkins = convertSkins(skins)\n    return JSONResponse(content=jsonable_encoder(convertedSkins))\n#Obtener skins faltantes\n@skins.get('/skins/missing')\ndef get_missing_skins():",
         "detail": "routers.skins",
         "documentation": {}
     },
@@ -221,7 +280,7 @@
         "kind": 2,
         "importPath": "serializer.champions",
         "description": "serializer.champions",
-        "peekOfCode": "def convertChampion(champ) -> dict:\n    return {\n        \"id\": str(champ[\"_id\"]),\n        \"name\": champ[\"name\"],\n        \"skins\": [str(skin_id) for skin_id in champ[\"skins\"]]\n    }\ndef convertChampions(champs) -> list:\n    return [convertChampion(champ) for champ in champs]",
+        "peekOfCode": "def convertChampion(champ) -> dict:\n    skin_names = [\n        skins_collection.find_one({\"_id\": ObjectId(skin_id)})[\"skin_name\"]\n        for skin_id in champ[\"skins\"]\n    ]\n    return {\n        \"id\": str(champ[\"_id\"]),\n        \"name\": champ[\"name\"],\n        \"skins\": skin_names\n    }",
         "detail": "serializer.champions",
         "documentation": {}
     },
@@ -239,7 +298,7 @@
         "kind": 2,
         "importPath": "serializer.skins",
         "description": "serializer.skins",
-        "peekOfCode": "def convertSkin(skin) -> dict:\n    return {\n        \"id\": str(skin[\"_id\"]),\n        \"skin_name\": skin[\"skin_name\"],\n        \"release_date\": skin[\"release_date\"],\n        \"isOwned\": skin[\"isOwned\"],\n        \"isWished\": skin[\"isWished\"],\n        \"url\": skin[\"url\"]\n    }\ndef convertSkins(skins) -> list:",
+        "peekOfCode": "def convertSkin(skin) -> dict:\n    champion_id = skin[\"champion_id\"]\n    champion_name = champions_collection.find_one({\"_id\": ObjectId(champion_id)})[\"name\"]\n    return {\n        \"id\": str(skin[\"_id\"]),\n        \"skin_name\": skin[\"skin_name\"],\n        \"release_date\": skin[\"release_date\"],\n        \"isOwned\": skin[\"isOwned\"],\n        \"isWished\": skin[\"isWished\"],\n        \"url\": skin[\"url\"],",
         "detail": "serializer.skins",
         "documentation": {}
     },
