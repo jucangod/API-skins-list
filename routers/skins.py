@@ -3,6 +3,7 @@ from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from config.config import skins_collection
 from serializer.skins import convertSkin, convertSkins
+from bson import ObjectId
 
 skins = APIRouter()
 
@@ -56,29 +57,35 @@ def get_owned_skins():
     return JSONResponse(content=jsonable_encoder(convertedSkins))
 
 #Añadir una skin deseada
-@skins.put('/skins/wished')
-def add_wished_skins(skin_id: str):
-    query = {"_id": ObjectId(skin_id)}
-    update = {"$set": {"isWished": True}}
+@skins.put('/skins/wished/{id}')
+def add_wished_skins(id: str):
+    query = {"_id": ObjectId(id)}
+    update = {"$set": {
+        "isWished": True,
+        "isOwned": False
+    }}
     skins_collection.update_one(query, update)
     updated_skin = skins_collection.find_one(query)
-    convertedSkins = convertSkins(updated_skin)
+    convertedSkins = convertSkin(update_skin)
     return JSONResponse(content=jsonable_encoder(convertedSkins))
 
 #Añadir una skin obtenida
-@skins.put('/skins/owned')
-def add_owned_skins(skin_id: str):
-    query = {"_id": ObjectId(skin_id)}
-    update = {"$set": {"isOwned": True}}
+@skins.put('/skins/owned/{id}')
+def add_owned_skins(id: str):
+    query = {"_id": ObjectId(id)}
+    update = {"$set": {
+        "isOwned": True,
+        "isWished": False
+    }}
     skins_collection.update_one(query, update)
     updated_skin = skins_collection.find_one(query)
-    convertedSkins = convertSkins(updated_skin)
+    convertedSkins = convertSkin(updated_skin)
     return JSONResponse(content=jsonable_encoder(convertedSkins))
 
 #Eliminar skin
-@skins.put('/skins')
-def delete_skins(skin_id: str):
-    query = {"_id": ObjectId(skin_id)}
+@skins.put('/skins/{id}')
+def delete_skins(id: str):
+    query = {"_id": ObjectId(id)}
     update = {
         "$set": {
             "isOwned": False,
@@ -87,5 +94,5 @@ def delete_skins(skin_id: str):
     }
     skins_collection.update_one(query, update)
     updated_skin = skins_collection.find_one(query)
-    convertedSkins = convertSkins(updated_skin)
+    convertedSkins = convertSkin(updated_skin)
     return JSONResponse(content=jsonable_encoder(convertedSkins))
