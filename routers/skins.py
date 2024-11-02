@@ -66,7 +66,7 @@ def add_wished_skins(id: str):
     }}
     skins_collection.update_one(query, update)
     updated_skin = skins_collection.find_one(query)
-    convertedSkins = convertSkin(update_skin)
+    convertedSkins = convertSkin(updated_skin)
     return JSONResponse(content=jsonable_encoder(convertedSkins))
 
 #Añadir una skin obtenida
