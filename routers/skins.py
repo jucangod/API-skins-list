@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from config.config import skins_collection
@@ -96,3 +96,14 @@ def delete_skins(id: str):
     updated_skin = skins_collection.find_one(query)
     convertedSkins = convertSkin(updated_skin)
     return JSONResponse(content=jsonable_encoder(convertedSkins))
+
+# Eliminar skin completamente
+@skins.delete('/skins/{id}')
+def remove_skin(id: str):
+    query = {"_id": ObjectId(id)}
+    result = skins_collection.delete_one(query)
+    
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Skin no encontrada")
+    
+    return JSONResponse(content={"detail": "Skin eliminada correctamente"})

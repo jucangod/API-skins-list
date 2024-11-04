@@ -2,8 +2,8 @@ from bson import ObjectId
 from config.config import champions_collection
 
 def convertSkin(skin) -> dict:
-    champion_id = skin["champion_id"]
-    champion_name = champions_collection.find_one({"_id": ObjectId(champion_id)})["name"]
+    # Obtener el nombre del campeón utilizando `champion_id` en la colección de campeones
+    champion = champions_collection.find_one({"_id": skin["champion_id"]})
     
     return {
         "id": str(skin["_id"]),
@@ -12,7 +12,7 @@ def convertSkin(skin) -> dict:
         "isOwned": skin["isOwned"],
         "isWished": skin["isWished"],
         "url": skin["url"],
-        "champion": champion_name
+        "champion": champion["name"] if champion else None  # Asegurarse de manejar casos donde el campeón no existe
     }
     
 def convertSkins(skins) -> list:

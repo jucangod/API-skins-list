@@ -9,5 +9,5 @@ champions = APIRouter()
 @champions.get('/champions')
 def get_champions():
     champions = champions_collection.find()
-    convertedChampions = convertChampions(champions)
-    return JSONResponse(content=jsonable_encoder(convertedChampions))
+    converted_data = convertChampions(champions)
+    return JSONResponse(content=jsonable_encoder(converted_data))

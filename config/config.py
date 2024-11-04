@@ -7,8 +7,8 @@ uri = "mongodb+srv://jcespinozarodriguez:3sP0RtduIj7JM03G@skins-wish-list.dteyc.
 client = MongoClient(uri, server_api=ServerApi('1'))
 
 db = client.skins_list
-champions_collection = db['champions']
 skins_collection = db['skins']
+champions_collection = db['champions']
 
 # Send a ping to confirm a successful connection
 try:
